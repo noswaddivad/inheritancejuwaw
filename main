@@ -1,0 +1,132 @@
+package inheritance_oop;
+import java.util.Scanner;
+public class main {
+
+	public static void main(String[] args) {
+		FoodMenu f = new FoodMenu();
+		Menu m = new Menu(f.Soup, f.MC, f.Dessert, f.Appetizer);
+		m.Order();
+	}
+
+}
+class FoodMenu{
+	Scanner sc = new Scanner(System.in);
+	
+	String  Soup, MC, Dessert, Appetizer;
+	
+	String [] soup = {"Pork Sinigang", "Beef bulalo", "Chicken tinola"};
+	String [] MainCourse = {"Adobo", "Caldereta", "Menudo"};
+	String [] dessert = {"HaloHalo", "Ice cream", "Cake"};
+	String [] appetizer = {"Chicharon", "Baked Peanut"};
+	
+	void Welcome() {
+		System.out.println("- - -Food Menu - - -");
+	}
+	void Print() {
+		System.out.println("\n --- Order: ---");
+	}
+}
+
+class Menu extends FoodMenu{
+	String menu;
+	Menu(String Soup, String MC, String Dessert, String Appetizer){
+		this.Soup = Soup;
+		this.MC = MC;
+		this.Dessert = Dessert;
+		this.Appetizer = Appetizer;
+	}
+
+	void Order() {
+		super.Welcome();
+		System.out.println("---Available Soup---");
+		for (int i = 0; i < soup.length; i++)
+            System.out.println((i + 1) + ". " + soup[i]);
+		chooseSoup();
+	}
+	
+	void chooseSoup() {
+		System.out.print("Choose Soup: ");
+		String Soup = sc.nextLine();
+		
+		switch(Soup) {
+		case "pork sinigang":
+			break;
+		case "beef bulalo":
+			break;
+		case "chicken tinola":
+			break;
+		default:
+	    	System.out.println("Soup Unavailable");
+	    	break;
+		}
+		chooseMC();
+	}
+	void chooseMC() {
+		sc.nextLine();
+		System.out.println("---Available Main Course---");
+		for (int i = 0; i < MainCourse.length; i++)
+            System.out.println((i + 1) + ". " + MainCourse[i]);
+		sc.nextLine();
+		
+		System.out.print("Choose Main Course: ");
+		String MC = sc.nextLine();
+		
+		switch(MC) {
+		case "adobo":
+			break;
+		case "caldereta":
+			break;
+		case "menudo":
+			break;
+		default:
+	    	System.out.println("Main Course Unavailable");
+	    	break;
+		}
+		chooseDessert();
+	}
+	void chooseDessert() {
+		sc.nextLine();
+		System.out.println("---Available Dessert---");
+		for (int i = 0; i < dessert.length; i++)
+            System.out.println((i + 1) + ". " + dessert[i]);
+		sc.nextLine();
+		
+		System.out.print("Choose Dessert: ");
+		String Dessert = sc.nextLine();
+		
+		switch(Dessert) {
+		case "halo-halo":
+			break;
+		case "ice cream":
+			break;
+		case "cake":
+			break;
+		default:
+	    	System.out.println("Dessert Unavailable");
+	    	break;
+		}
+		chooseAppetizer();
+}
+	void chooseAppetizer() {
+		sc.nextLine();
+		System.out.println("---Available Appetizer---");
+		for (int i = 0; i < appetizer.length; i++)
+            System.out.println((i + 1) + ". " + appetizer[i]);
+		sc.nextLine();
+		
+		System.out.print("Choose Appetizer: ");
+		String Appetizer = sc.nextLine();
+		
+		switch(Appetizer) {
+		case "chicharon":
+			break;
+		case "baked peanut":
+			break;
+		default:
+	    	System.out.println("Appetizer Unavailable");
+	    	break;
+		}
+	
+	sc.close();
+}
+}
