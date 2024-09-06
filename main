@@ -1,132 +1,128 @@
-package inheritance_oop;
 import java.util.Scanner;
-public class main {
 
-	public static void main(String[] args) {
-		FoodMenu f = new FoodMenu();
-		Menu m = new Menu(f.Soup, f.MC, f.Dessert, f.Appetizer);
-		m.Order();
-	}
+public class pyramid {
 
-}
-class FoodMenu{
-	Scanner sc = new Scanner(System.in);
-	
-	String  Soup, MC, Dessert, Appetizer;
-	
-	String [] soup = {"Pork Sinigang", "Beef bulalo", "Chicken tinola"};
-	String [] MainCourse = {"Adobo", "Caldereta", "Menudo"};
-	String [] dessert = {"HaloHalo", "Ice cream", "Cake"};
-	String [] appetizer = {"Chicharon", "Baked Peanut"};
-	
-	void Welcome() {
-		System.out.println("- - -Food Menu - - -");
-	}
-	void Print() {
-		System.out.println("\n --- Order: ---");
-	}
+    char stck[];
+    int top = -1;
+    int maxSize;  // Limit for the stack
+
+    // Constructor to initialize stack with a limit
+    public pyramid(int size) {
+        maxSize = size;
+        stck = new char[maxSize];
+    }
+
+    // Check if the stack is empty
+    boolean isEmpty() {
+        return top == -1;
+    }
+
+    // Check if the stack is full
+    boolean isFull() {
+        return top == maxSize - 1;
+    }
+
+    // Push method to add data to the stack
+    void push(char data) {
+        if (isFull()) {
+            System.out.println("Stack Overflow!");
+        } else {
+            top++;
+            stck[top] = data;
+            System.out.println("Pushed " + data);
+        }
+    }
+
+    // Pop method to remove data from the stack
+    void pop() {
+        if (isEmpty()) {
+            System.out.println("Stack Underflow!");
+        } else {
+            char poppedData = stck[top];
+            System.out.println("Popped " + poppedData);
+            top--;
+        }
+    }
+
+    // Peek method to see the top element of the stack
+    char peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty");
+            return '\0';  // Return null character if the stack is empty
+        } else {
+            return stck[top];
+        }
+    }
+
+    // Size method to get the size of the stack
+    int size() {
+        return top + 1;
+    }
+
+    // Display method to print all elements of the stack
+    void display() {
+        if (isEmpty()) {
+            System.out.println("Stack is Empty!");
+        } else {
+            System.out.println("Stack elements:");
+            for (int i = top; i >= 0; i--) {
+                System.out.println(stck[i]);
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter the size of the stack:");
+        int size = scanner.nextInt();
+        pyramid stack = new pyramid(size);  // Create a stack with the specified limit
+        
+        boolean exit = false;
+        
+        while (!exit) {
+            System.out.println("\nChoose an operation:");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Peek");
+            System.out.println("4. Display Stack");
+            System.out.println("5. Exit");
+            int choice = scanner.nextInt();
+            
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter a character to push:");
+                    char data = scanner.next().charAt(0);
+                    stack.push(data);
+                    break;
+                    
+                case 2:
+                    stack.pop();
+                    break;
+                    
+                case 3:
+                    char topElement = stack.peek();
+                    if (topElement != '\0') {
+                        System.out.println("Top element is: " + topElement);
+                    }
+                    break;
+                    
+                case 4:
+                    stack.display();
+                    break;
+                    
+                case 5:
+                    exit = true;
+                    break;
+                    
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+        
+        scanner.close();
+    }
 }
 
-class Menu extends FoodMenu{
-	String menu;
-	Menu(String Soup, String MC, String Dessert, String Appetizer){
-		this.Soup = Soup;
-		this.MC = MC;
-		this.Dessert = Dessert;
-		this.Appetizer = Appetizer;
-	}
-
-	void Order() {
-		super.Welcome();
-		System.out.println("---Available Soup---");
-		for (int i = 0; i < soup.length; i++)
-            System.out.println((i + 1) + ". " + soup[i]);
-		chooseSoup();
-	}
-	
-	void chooseSoup() {
-		System.out.print("Choose Soup: ");
-		String Soup = sc.nextLine();
-		
-		switch(Soup) {
-		case "pork sinigang":
-			break;
-		case "beef bulalo":
-			break;
-		case "chicken tinola":
-			break;
-		default:
-	    	System.out.println("Soup Unavailable");
-	    	break;
-		}
-		chooseMC();
-	}
-	void chooseMC() {
-		sc.nextLine();
-		System.out.println("---Available Main Course---");
-		for (int i = 0; i < MainCourse.length; i++)
-            System.out.println((i + 1) + ". " + MainCourse[i]);
-		sc.nextLine();
-		
-		System.out.print("Choose Main Course: ");
-		String MC = sc.nextLine();
-		
-		switch(MC) {
-		case "adobo":
-			break;
-		case "caldereta":
-			break;
-		case "menudo":
-			break;
-		default:
-	    	System.out.println("Main Course Unavailable");
-	    	break;
-		}
-		chooseDessert();
-	}
-	void chooseDessert() {
-		sc.nextLine();
-		System.out.println("---Available Dessert---");
-		for (int i = 0; i < dessert.length; i++)
-            System.out.println((i + 1) + ". " + dessert[i]);
-		sc.nextLine();
-		
-		System.out.print("Choose Dessert: ");
-		String Dessert = sc.nextLine();
-		
-		switch(Dessert) {
-		case "halo-halo":
-			break;
-		case "ice cream":
-			break;
-		case "cake":
-			break;
-		default:
-	    	System.out.println("Dessert Unavailable");
-	    	break;
-		}
-		chooseAppetizer();
-}
-	void chooseAppetizer() {
-		sc.nextLine();
-		System.out.println("---Available Appetizer---");
-		for (int i = 0; i < appetizer.length; i++)
-            System.out.println((i + 1) + ". " + appetizer[i]);
-		sc.nextLine();
-		
-		System.out.print("Choose Appetizer: ");
-		String Appetizer = sc.nextLine();
-		
-		switch(Appetizer) {
-		case "chicharon":
-			break;
-		case "baked peanut":
-			break;
-		default:
-	    	System.out.println("Appetizer Unavailable");
-	    	break;
-		}
-	
-	sc.close();
-}
-}
