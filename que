@@ -1,0 +1,93 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class WaitingList {
+    
+    LinkedList<Character> que = new LinkedList<>();
+    Scanner scanner = new Scanner(System.in);
+    
+    // isEmpty
+    boolean isEmpty() {
+        return que.isEmpty();
+    }
+
+    // enqueue
+    void enqueue() {
+        System.out.print("Enter character to enqueue: ");
+        char data = scanner.next().charAt(0);
+        que.addLast(data);
+        System.out.println("Added to waiting list: " + data);
+    }
+
+    // dequeue
+    void dequeue() {
+        if (isEmpty()) {
+            System.out.println("Waiting list is empty");
+        } else {
+            char dequeued = que.removeFirst();
+            System.out.println("Removed from waiting list: " + dequeued);
+        }
+    }
+
+    // peek
+    void peek() {
+        if (isEmpty()) {
+            System.out.println("Waiting list is empty");
+        } else {
+            System.out.println("Next in line: " + que.getFirst());
+        }
+    }
+
+    // display queue
+    void display() {
+        if (isEmpty()) {
+            System.out.println("Waiting list is empty!");
+        } else {
+            System.out.print("Waiting list: ");
+            for (char element : que) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        WaitingList waitingList = new WaitingList();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nWaiting List Menu:");
+            System.out.println("1. Add to Waiting List (Enqueue)");
+            System.out.println("2. Remove from Waiting List (Dequeue)");
+            System.out.println("3. View Next in Waiting List (Peek)");
+            System.out.println("4. Display Full Waiting List");
+            System.out.println("5. Exit");
+            System.out.print("Choose an operation: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    waitingList.enqueue();
+                    break;
+                case 2:
+                    waitingList.dequeue();
+                    break;
+                case 3:
+                    waitingList.peek();
+                    break;
+                case 4:
+                    waitingList.display();
+                    break;
+                case 5:
+                    System.out.println("Exiting program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please choose again.");
+            }
+
+        } while (choice != 5);
+        
+        scanner.close();
+    }
+}
